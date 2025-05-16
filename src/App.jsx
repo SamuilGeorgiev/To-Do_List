@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,6 +6,9 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
   const [number, setNumber] = useState(0)
+  const [tasks, setTasks] = useState(0)
+
+
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('darkMode') === 'true';
@@ -13,14 +16,14 @@ function App() {
     return false;
   });
 
-  // Use useEffect to persist dark mode preference to localStorage
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('darkMode', String(darkMode));
     }
   }, [darkMode]);
 
-  // Use useEffect to apply the 'dark-mode' class to the body
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       if (darkMode) {
@@ -35,7 +38,8 @@ function App() {
     <div className={`app-container ${darkMode ? 'dark-mode-container' : 'light-mode-container'}`}>
       <div>
         <div className='headi' style={{ textAlign: "right" }}>
-          <h1>The</h1>
+          <input value={tasks} onChange={(e) =>setTasks(e.target.value) }/>
+          <button onClick={setTasks}>ADD</button>
         </div>
         <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
