@@ -5,6 +5,24 @@
   text-align: center;
 }
 
+
+
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+label {
+  cursor: pointer;
+}
+
+
+
 .the1234 {
   color: #33b231;
 }

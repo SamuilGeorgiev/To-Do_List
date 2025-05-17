@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [number, setNumber] = useState(0)
+ 
   const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState('');
 
@@ -49,7 +47,12 @@ function App() {
           <button onClick={handleAddTask}>ADD</button>
           <ul >
             {tasks.map((t, i) => (
-              <li key = {i}>{t}</li>
+              <li key = {i}>
+                <label>
+                  <input type="checkbox" />
+                  {t}
+                </label>
+                </li>
             ))}
 
           </ul>
