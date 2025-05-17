@@ -6,8 +6,15 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
   const [number, setNumber] = useState(0)
-  const [tasks, setTasks] = useState(0)
+  const [tasks, setTasks] = useState([]);
+  const [newTaskText, setNewTaskText] = useState('');
 
+  const handleAddTask = () => {
+    if (newTaskText.trim() !== '') { // Prevent adding empty tasks
+      setTasks(prevTasks => [...prevTasks, newTaskText.trim()]); // Add new task
+      setNewTaskText(''); // Clear the input field
+    }
+  };
 
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -38,8 +45,14 @@ function App() {
     <div className={`app-container ${darkMode ? 'dark-mode-container' : 'light-mode-container'}`}>
       <div>
         <div className='headi' style={{ textAlign: "right" }}>
-          <input value={tasks} onChange={(e) =>setTasks(e.target.value) }/>
-          <button onClick={setTasks}>ADD</button>
+          <input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} />
+          <button onClick={handleAddTask}>ADD</button>
+          <ul >
+            {tasks.map((t, i) => (
+              <li key = {i}>{t}</li>
+            ))}
+
+          </ul>
         </div>
         <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
