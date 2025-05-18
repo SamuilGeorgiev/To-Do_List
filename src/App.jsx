@@ -5,14 +5,26 @@ import './App.css'
 function App() {
  
   const [tasks, setTasks] = useState([]);
+  
   const [newTaskText, setNewTaskText] = useState('');
+  
+
 
   const handleAddTask = () => {
-    if (newTaskText.trim() !== '') { // Prevent adding empty tasks
-      setTasks(prevTasks => [...prevTasks, newTaskText.trim()]); // Add new task
-      setNewTaskText(''); // Clear the input field
+    if (newTaskText.trim() !== '') {
+      setTasks(prevTasks => [...prevTasks, { text: newTaskText.trim(), completed: false }]); 
+      setNewTaskText(''); 
     }
   };
+
+  const toggleTaskCompletion = (index) => {
+    setTasks(prevTasks => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks[index].completed = !updatedTasks[index].completed;
+      return updatedTasks;
+    });
+  };
+  
 
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -45,17 +57,45 @@ function App() {
         <div className='headi' style={{ textAlign: "right" }}>
           <input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} />
           <button onClick={handleAddTask}>ADD</button>
-          <ul >
-            {tasks.map((t, i) => (
-              <li key = {i}>
-                <label>
-                  <input type="checkbox" />
-                  {t}
-                </label>
-                </li>
-            ))}
+          <ul>
+  {tasks.map((task, i) => {
+    if (task.completed) return null;
+    return (
+      <li key={i}>
+        <label>
+          <input
+            type="checkbox"
+            checked={task.completed}
+            onChange={() => toggleTaskCompletion(i)}
+          />
+          <s>{task.text}</s>
+        </label>
+      </li>
+    );
+  })}
+</ul>
 
-          </ul>
+        </div>
+        <div>
+          <h1>Completed Tasks</h1>
+          <ul>
+  {tasks.map((task, i) => {
+    if (!task.completed) return null;
+    return (
+      <li key={i}>
+        <label>
+          <input
+            type="checkbox"
+            checked={task.completed}
+            onChange={() => toggleTaskCompletion(i)}
+          />
+          <s>{task.text}</s>
+        </label>
+      </li>
+    );
+  })}
+</ul>
+
         </div>
         
       </div>
