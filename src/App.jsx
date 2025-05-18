@@ -1,30 +1,26 @@
-import React, { useState, useEffect } from 'react'
-
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
- 
   const [tasks, setTasks] = useState([]);
-  
   const [newTaskText, setNewTaskText] = useState('');
-  
-
 
   const handleAddTask = () => {
     if (newTaskText.trim() !== '') {
-      setTasks(prevTasks => [...prevTasks, { text: newTaskText.trim(), completed: false }]); 
-      setNewTaskText(''); 
+      setTasks(prev =>
+        [...prev, { text: newTaskText.trim(), completed: false }]
+      );
+      setNewTaskText('');
     }
   };
 
-  const toggleTaskCompletion = (index) => {
-    setTasks(prevTasks => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks[index].completed = !updatedTasks[index].completed;
-      return updatedTasks;
-    });
+  const toggleTaskCompletion = index => {
+    setTasks(prev =>
+      prev.map((task, i) =>
+        i === index ? { ...task, completed: !task.completed } : task
+      )
+    );
   };
-  
 
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -33,85 +29,70 @@ function App() {
     return false;
   });
 
-  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('darkMode', String(darkMode));
-    }
-  }, [darkMode]);
-
-  
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (darkMode) {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
+      document.body.classList.toggle('dark-mode', darkMode);
     }
   }, [darkMode]);
 
   return (
     <div className={`app-container ${darkMode ? 'dark-mode-container' : 'light-mode-container'}`}>
       <div>
-        <div className='headi' style={{ textAlign: "right" }}>
-          <input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} />
+        <div className="headi" style={{ textAlign: 'right' }}>
+          <input
+            value={newTaskText}
+            onChange={e => setNewTaskText(e.target.value)}
+          />
           <button onClick={handleAddTask}>ADD</button>
-          <ul>
-  {tasks.map((task, i) => {
-    if (task.completed) return null;
-    return (
-      <li key={i}>
-        <label>
-          <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={() => toggleTaskCompletion(i)}
-          />
-          <s>{task.text}</s>
-        </label>
-      </li>
-    );
-  })}
-</ul>
-
         </div>
-        <div>
-          <h1>Completed Tasks</h1>
-          <ul>
-  {tasks.map((task, i) => {
-    if (!task.completed) return null;
-    return (
-      <li key={i}>
-        <label>
-          <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={() => toggleTaskCompletion(i)}
-          />
-          <s>{task.text}</s>
-        </label>
-      </li>
-    );
-  })}
-</ul>
 
-        </div>
-        
+        <h2>Active Tasks</h2>
+        <ul>
+          {tasks.map((task, i) => {
+            if (task.completed) return null;
+            return (
+              <li key={i}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => toggleTaskCompletion(i)}
+                  />
+                  {task.text}
+                </label>
+              </li>
+            );
+          })}
+        </ul>
+
+        <h2>Completed Tasks</h2>
+        <ul>
+          {tasks.map((task, i) => {
+            if (!task.completed) return null;
+            return (
+              <li key={i}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => toggleTaskCompletion(i)}
+                  />
+                  <s>{task.text}</s>
+                </label>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-      
+
       <div className="card">
-       
-        <br />
-        
-        <button onClick={() => setDarkMode(prevMode => !prevMode)}>
+        <button onClick={() => setDarkMode(prev => !prev)}>
           Toggle dark mode
         </button>
-        
       </div>
-      
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
