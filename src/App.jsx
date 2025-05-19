@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('tasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
   const [newTaskText, setNewTaskText] = useState('');
 
   const handleAddTask = () => {
@@ -21,6 +25,11 @@ function App() {
       )
     );
   };
+
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
