@@ -26,6 +26,12 @@ function App() {
     );
   };
 
+  // Delete task by index
+const handleDeleteTask = (indexToDelete) => {
+  setTasks(prev => prev.filter((_, index) => index !== indexToDelete));
+};
+
+
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -47,7 +53,12 @@ function App() {
 
   return (
     <div className={`app-container ${darkMode ? 'dark-mode-container' : 'light-mode-container'}`}>
-      <div>
+      <div  >
+      <div className="card">
+        <button onClick={() => setDarkMode(prev => !prev)}>
+          Toggle dark mode
+        </button>
+        </div>
         <div className="headi" style={{ textAlign: 'right' }}>
           <input
             value={newTaskText}
@@ -57,19 +68,20 @@ function App() {
         </div>
 
         <h2>Active Tasks</h2>
-        <ul>
+        <ul className="at">
           {tasks.map((task, i) => {
             if (task.completed) return null;
             return (
-              <li key={i}>
-                <label>
-                  <input
+              <li  key={i}>
+                <label >
+                  <input 
                     type="checkbox"
                     checked={task.completed}
                     onChange={() => toggleTaskCompletion(i)}
                   />
                   {task.text}
                 </label>
+                <button onClick={() => handleDeleteTask(i)}>❌</button>
               </li>
             );
           })}
@@ -89,17 +101,14 @@ function App() {
                   />
                   <s>{task.text}</s>
                 </label>
+                <button onClick={() => handleDeleteTask(i)}>❌</button>
               </li>
             );
           })}
         </ul>
       </div>
 
-      <div className="card">
-        <button onClick={() => setDarkMode(prev => !prev)}>
-          Toggle dark mode
-        </button>
-      </div>
+
     </div>
   );
 }
