@@ -1,0 +1,137 @@
+/* Container for the entire Auth component */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  /* Flex utilities (used in logged-in state) */
+  .flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .space-x-9 > * + * {
+    margin-left: 36px;
+  }
+  
+  /* Typography */
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+  }
+  
+  .dark-mode h2 {
+    color: #e5e7eb;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .text-gray-700 {
+    color: #4a5568;
+  }
+  
+  .dark-mode .text-gray-700 {
+    color: #d1d5db;
+  }
+  
+  .text-red-500 {
+    color: #ef4444;
+    margin: 8px 0 0;
+    text-align: center;
+  }
+  
+  /* Inputs */
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+    background-color: #ffffff;
+  }
+  
+  .dark-mode input[type="email"],
+  .dark-mode input[type="password"] {
+    background-color: #4b5563;
+    border-color: #6b7280;
+    color: #d1d5db;
+  }
+  
+  input[type="email"]::placeholder,
+  input[type="password"]::placeholder {
+    color: #9ca3af;
+  }
+  
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #3b82f6;
+  }
+  
+  /* Buttons */
+  button {
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.875rem;
+    border: none;
+  }
+  
+  button.bg {
+    width: 100%;
+    padding: 8px 16px;
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-radius: 9999px;
+  }
+  
+  button.bg:hover {
+    background-color: #2563eb;
+  }
+  
+  button.logout {
+    padding: 4px 16px;
+    background-color: #ef4444;
+    color: #ffffff;
+    border-radius: 9999px;
+  }
+  
+  button.logout:hover {
+    background-color: #dc2626;
+  }
+  
+  button.toggle {
+    background: none;
+    color: #3b82f6;
+    text-decoration: none;
+  }
+  
+  button.toggle:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 400px) {
+    .auth-container {
+      gap: 12px;
+    }
+  
+    h2 {
+      font-size: 1.125rem;
+    }
+  
+    button.bg {
+      padding: 8px 12px;
+    }
+  }

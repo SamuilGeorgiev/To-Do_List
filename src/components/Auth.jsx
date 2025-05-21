@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import './Auth.css';
 
 function Auth({ setUser }) {
   const [email, setEmail] = useState('');
@@ -88,7 +89,7 @@ function Auth({ setUser }) {
   
   if (currentUser) {
     return (
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-9">
         <span className="text-gray-700 text-sm">Welcome, {currentUser.email}</span>
         <button
           
@@ -126,7 +127,7 @@ function Auth({ setUser }) {
         }}
       />
       <button
-        className="px-4 "
+        className="px-4 bg"
         onClick={handleSubmit}
       >
         {isSignUp ? 'Sign Up' : 'Login'}
