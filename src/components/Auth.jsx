@@ -58,12 +58,12 @@ function Auth({ setUser }) {
     }
   };
 
-  // Handle logout
+  
   const handleLogout = async () => {
     await signOut(auth);
   };
 
-  // Handle form submission with client-side validation
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -85,13 +85,13 @@ function Auth({ setUser }) {
     }
   };
 
-  // Render logout UI when user is authenticated
+  
   if (currentUser) {
     return (
       <div className="flex items-center space-x-3">
         <span className="text-gray-700 text-sm">Welcome, {currentUser.email}</span>
         <button
-          className="px-4 py-1 bg-red-500 text-white rounded-full text-sm hover:bg-red-600 transition"
+          
           onClick={handleLogout}
         >
           Logout
@@ -102,12 +102,12 @@ function Auth({ setUser }) {
 
   // Render authentication form when user is not authenticated
   return (
-    <div className="flex flex-col items-center space-y-4">
-      <h2 className="text-xl font-bold">{isSignUp ? 'Sign Up' : 'Login'}</h2>
+    <div>
+      <h2 >{isSignUp ? 'Sign Up' : 'Login'}</h2>
       {error && <p className="text-red-500 text-sm">{error}</p>}
       <input
         type="email"
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
+        className="rounded-lg"
         placeholder="Email"
         value={email}
         onChange={(e) => {
@@ -117,7 +117,7 @@ function Auth({ setUser }) {
       />
       <input
         type="password"
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
+        
         placeholder="Password"
         value={password}
         onChange={(e) => {
@@ -126,13 +126,13 @@ function Auth({ setUser }) {
         }}
       />
       <button
-        className="px-4 py-2 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600 transition"
+        className="px-4 "
         onClick={handleSubmit}
       >
         {isSignUp ? 'Sign Up' : 'Login'}
       </button>
       <button
-        className="text-blue-500 text-sm hover:underline"
+        className=""
         onClick={() => setIsSignUp(!isSignUp)}
       >
         {isSignUp ? 'Already have an account? Login' : "Don't have an account? Sign Up"}

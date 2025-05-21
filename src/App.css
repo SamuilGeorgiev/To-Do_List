@@ -1,3 +1,6 @@
+
+@import "tailwindcss";
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -131,16 +134,14 @@ body.dark-mode button:hover {
 }
 
 
-
 .app-container {
-  display: flex;
-  justify-content: center;
   padding: 20px;
 }
 .card {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 .flex {
   display: flex;
@@ -151,11 +152,11 @@ body.dark-mode button:hover {
 .items-center {
   align-items: center;
 }
-.space-x-3 > * + * {
-  margin-left: 12px;
-}
 .space-y-4 > * + * {
   margin-top: 16px;
+}
+.space-x-3 > * + * {
+  margin-left: 12px;
 }
 .text-xl {
   font-size: 1.25rem;
@@ -163,11 +164,11 @@ body.dark-mode button:hover {
 .font-bold {
   font-weight: 700;
 }
-.text-sm {
-  font-size: 0.875rem;
-}
 .text-gray-700 {
   color: #4a5568;
+}
+.text-sm {
+  font-size: 14px;
 }
 .text-red-500 {
   color: #ef4444;
@@ -195,7 +196,7 @@ body.dark-mode button:hover {
   padding-bottom: 4px;
 }
 .border {
-  border-width: 1px;
+  border-width: 2px;
 }
 .border-gray-300 {
   border-color: #d1d5db;
